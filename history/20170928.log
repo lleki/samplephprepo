@@ -1,0 +1,299 @@
+    1  defaults write com.apple.finder AppleShowAllFiles TRUE
+    2  killall Finder
+    3  defaults write com.apple.finder AppleShowAllFiles FALSE
+    4  defaults write com.apple.finder AppleShowAllFiles FALSE
+    5  killall Finder
+    6  /Users/cappie/Downloads/mysql-5.6.27-osx10.9-x86_64/bin/mysql_client_test_embedded ; exit;
+    7  /Users/cappie/Downloads/mysql-5.6.27-osx10.9-x86_64/bin/mysql ; exit;
+    8  Drop table departments;
+    9  Drop table Employees;
+   10  Drop Table Locations;
+   11  Drop table Job_Grades;
+   12  Drop Table Countries;
+   13  Drop Table Jobs;
+   14  Drop Table Job_History;
+   15  Drop Table Regions;
+   16  Create Table Departments
+   17   (Department_Id Numeric(4) Primary Key,
+   18    Department_Name Varchar(30) Not null,
+   19    Manager_Id Numeric(6),
+   20    Location_Id Numeric(4));
+   21    
+   22  Create Table Employees
+   23   (Employee_id Numeric(6) PRIMARY KEY,
+   24    First_Name Varchar(20),
+   25    Last_Name Varchar(25) NOT NULL,
+   26    Email Varchar(20),
+   27    Phone_Number Varchar(20),
+   28    Hire_Date Date NOT NULL,
+   29    Job_Id Varchar(10),
+   30    Salary Numeric(8,2),
+   31    Commission_Pct Numeric(2,2),
+   32    Manager_Id Numeric(6),
+   33    Department_Id Numeric(4));
+   34    
+   35  Create Table Job_Grades
+   36     (Grade_Level Varchar(3),
+   37      Lowest_Sal Numeric(6),
+   38      Highest_Sal Numeric(6));
+   39  Create Table Jobs
+   40   (Job_Id Varchar(10) not null,
+   41    Job_Title Varchar(35) not null,
+   42    Min_Salary Numeric(6),
+   43    Max_Salary Numeric(6));
+   44    
+   45  Create Table Job_History
+   46   (Employee_Id Numeric(6) not null,
+   47    Start_Date Date Not null,
+   48    End_Date Date Not null,
+   49    Job_Id Varchar(10) not null,
+   50    Department_Id Numeric(4));
+   51  Create Table Regions
+   52   (Region_Id Numeric(2) not null,
+   53    Region_Name Varchar(25));
+   54  Create Table Countries
+   55   (Country_Id Char(2) Primary Key,
+   56    Country_Name varchar(40),
+   57    Region_Id Numeric(2));  
+   58    
+   59  Create Table Locations
+   60   (Location_Id Numeric(4) Primary Key,
+   61    Street_Address Varchar(40),
+   62    Postal_Code Varchar(12),
+   63    City Varchar(30) not null,
+   64    State_Province Varchar(25),
+   65    Country_Id Char(2));
+   66  -- Populate Countries
+   67  Insert Into Countries(Country_Id,Country_Name,Region_Id)
+   68  Values ('US','United States of America',2);
+   69  Insert Into Countries(Country_Id,Country_Name,Region_Id)
+   70  Values ('CA','Canada',2);
+   71  Insert Into Countries(Country_Id,Country_Name,Region_Id)
+   72  Values ('DE','Germany',1);
+   73  Insert Into Countries(Country_Id,Country_Name,Region_Id)
+   74  Values ('UK','United Kingdom',1);
+   75  -- Populate table Employees
+   76  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   77  Values(100,'Steven','King','SKING','515.123.4567', DATE('1987-06-17'),'AD_PRES',24000,null,null,90);
+   78  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   79  Values (101,'Neena','Kochhar','NKOCHHAR','515.123.4568', Date('1989-09-21'),'AD_VP',17000,null,100,90);
+   80  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   81  Values (103,'Alexander','Hunold','AHUNOLD','590.423.4567', Date('1990-01-03'),'IT_PROG',9000,null,102,60);
+   82  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   83  Values (104,'Bruce','Ernst','BERNST','590.423.4568', Date('1991-05-21'),'IT_PROG',6000,null,103,60);
+   84  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   85  Values (107,'Diana','Lorentz','DLORENTZ','590.423.5567', Date('1999-02-07'),'IT_PROG',4200,null,103,60);
+   86  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   87  Values (124,'Kevin','Mourgos','KMOURGOS','650.123.5234', Date('1999-11-16'),'ST_MAN',5800,null,100,50);
+   88  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   89  Values (141,'Trenna','Rajs','TRAJS','650.121.8009', Date('1995-10-17'),'ST_CLERK',3500,null,124,50);
+   90  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   91  Values (142,'Curtis','Davies','CDAVIES','650.121.2994', Date('1997-01-29'),'ST_CLERK',3100,null,124,50);
+   92  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   93  Values (143,'Randall','Matos','RMATOS','650.121.2874', Date('1998-03-15'),'ST_CLERK',2600,null,124,50);
+   94  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   95  Values (144,'Peter','Vargas','PVARGAS','650.121.2004', Date('1998-07-09'),'ST_CLERK',2500,null,124,50);
+   96  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   97  Values (149,'Eleni','Zlotkey','EZLOTKEY','011.44.1344.429018', Date('2000-01-29'),'SA_MAN',10500,.2,100,80);
+   98  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+   99  Values (174,'Ellen','Abel','EABEL','011.44.1644.429267', Date('1996-05-11'),'SA_REP',11000,.3,149,80);
+  100  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  101  Values (176,'Jonathon','Taylor','JTAYLOR','011.44.1644.429265', Date('1998-03-24'),'SA_REP',8600,.2,149,80);
+  102  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  103  Values (178,'Kimberely','Grant','KGRANT','011.44.1644.429263', Date('1999-05-24'),'SA_REP',7000,.15,149,null);
+  104  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  105  Values (200,'Jennifer','Whalen','JWHALEN','515.123.4444', Date('1987-09-17'),'AD_ASST',4400,null,101,10);
+  106  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  107  Values (201,'Michael','Hartstein','MHARTSTE','515.123.5555', Date('1996-02-17'),'MK_MAN',13000,null,100,20);
+  108  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  109  Values (202,'Pat','Fay','PFAY','603.123.6666',Date('1997-09-17'), 'MK_REP',6000,null,201,20);
+  110  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  111  Values (205,'Shelley','Higgins','SHIGGINS','515.123.8080', Date('1994-06-07'),'AC_MGR',12000,null,101,110);
+  112  Insert Into Employees(Employee_Id,First_Name,Last_Name,Email,Phone_Number,Hire_date,Job_Id,Salary,Commission_Pct,Manager_Id,Department_Id)
+  113  Values (206,'William','Gietz','WGIETZ','515.123.8181', Date('1994-06-07'),'AC_ACCOUNT',8300,null,205,110);
+  114  -- Populate Departments
+  115  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  116  Values (190,'Contracting',null,1700);
+  117  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  118  Values (10,'Administration',200,1700);
+  119  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  120  Values (20,'Marketing',201,1800);
+  121  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  122  Values (50,'Shipping',124,1500);
+  123  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  124  Values (60,'IT',103,1400);
+  125  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  126  Values (80,'Sales',149,2500);
+  127  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  128  Values (90,'Executive',100,1700);
+  129  Insert Into Departments(Department_Id,Department_Name,Manager_Id,Location_Id)
+  130  Values (110,'Accounting',205,1700);
+  131  -- Populate Job_Grades
+  132  Insert Into Job_Grades(Grade_Level,Lowest_Sal,Highest_Sal)
+  133  Values ('A',1000,2999);
+  134  Insert Into Job_Grades(Grade_Level,Lowest_Sal,Highest_Sal)
+  135  Values ('B',3000,5999);
+  136  Insert Into Job_Grades(Grade_Level,Lowest_Sal,Highest_Sal)
+  137  Values ('C',6000,9999);
+  138  Insert Into Job_Grades(Grade_Level,Lowest_Sal,Highest_Sal)
+  139  Values ('D',10000,14999);
+  140  Insert Into Job_Grades(Grade_Level,Lowest_Sal,Highest_Sal)
+  141  Values ('E',15000,24999);
+  142  Insert Into Job_Grades(Grade_Level,Lowest_Sal,Highest_Sal)
+  143  Values ('F',25000,40000);
+  144  -- Populate Job_History
+  145  Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  146  Values(200,Date('1994-07-01'),Date('1998-12-31'),'AC_ACCOUNT',90);
+  147   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  148   Values(102, Date('1993-01-13'), Date('1998-07-24'), 'IT_PROG',60);
+  149   
+  150   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  151   Values(101, Date('1989-09-21'), Date('1993-10-27'), 'AC_ACCOUNT',110);
+  152   
+  153   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  154   Values(101, Date('1993-10-28'), Date('1997-03-15'), 'AC_MGR',110);
+  155   
+  156   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  157   Values(201, Date('1996-02-17'), Date('1999-12-19'), 'MK_REP',20);
+  158   
+  159   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  160   Values(114, Date('1998-03-24'), Date('1999-12-31'), 'ST_CLERK',50);
+  161   
+  162   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  163   Values(122, Date('1999-01-01'), Date('1999-12-31'), 'ST_CLERK',50);
+  164   
+  165   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  166   Values(200, Date('1987-09-17'), Date('1993-06-17'), 'AD_ASST',90);
+  167   
+  168   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  169   Values(176, Date('1998-03-24'), Date('1998-12-31'), 'SA_REP',80);
+  170   
+  171   Insert Into Job_History(Employee_Id,Start_Date,End_Date,Job_Id,Department_Id)
+  172   Values(176, Date('1999-01-01'), Date('1999-12-31'), 'SA_MAN',80);
+  173  -- Populate Jobs
+  174  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  175  Values('AD_PRES','President',20000,40000);
+  176  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  177  Values('AD_VP','Administration Vice President',15000,30000);
+  178  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  179  Values('AD_ASST','Administration Assistant',3000,6000);
+  180  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  181  Values('AC_MGR','Accounting Manager',8200,16000);
+  182  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  183  Values('AC_ACCOUNT','Public Accountant',4200,9000);
+  184  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  185  Values('SA_MAN','Sales Manager',10000,20000);
+  186  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  187  Values('SA_REP','Sales Representative',6000,12000);
+  188  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  189  Values('ST_MAN','Stock Manager',5500,8500);
+  190  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  191  Values('ST_CLECK','Stock Clerk',2000,5000);
+  192  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  193  Values('IT_PROG','Programmer',4000,10000);
+  194  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  195  Values('MK_MAN','Marketing Manager',9000,15000);
+  196  Insert Into Jobs(Job_Id,Job_Title,Min_Salary,Max_Salary)
+  197  Values('MK_REP','Marketing Representative',4000,9000);
+  198  -- Populate Locations
+  199  Insert Into Locations(Location_ID,Street_Address,Postal_Code,City,State_Province,Country_Id)
+  200  Values (1400,'2014 Jabberwocky Rd','26192','Southlake','Texas','US');
+  201  Insert Into Locations(Location_ID,Street_Address,Postal_Code,City,State_Province,Country_Id)
+  202  Values (1500,'2011 Interiors Blvd','99236','South San Francisco','California','US');
+  203  Insert Into Locations(Location_ID,Street_Address,Postal_Code,City,State_Province,Country_Id)
+  204  Values (1700,'2004 Charade Rd','98199','Seattle','Washington','US');
+  205  Insert Into Locations(Location_ID,Street_Address,Postal_Code,City,State_Province,Country_Id)
+  206  Values (1800,'460 Bloor St W.','ON M5S 1X8','Toronto','Ontario','CA');
+  207         
+  208  Insert Into Locations(Location_ID,Street_Address,Postal_Code,City,State_Province,Country_Id)
+  209  Values (2500,'Magdalen Centre, The Oxford Science Park','OX9 9ZB','Oxford','Oxford','UK');
+  210  -- Populate Regions
+  211  Insert Into Regions(Region_Id,Region_Name)
+  212  Values (1,'Europe');
+  213  Insert Into Regions(Region_Id,Region_Name)
+  214  Values (2,'Americas');
+  215  Insert Into Regions(Region_Id,Region_Name)
+  216  Values (3,'Asia');
+  217  Insert Into Regions(Region_Id,Region_Name)
+  218  Values (4,'Middle East and Africa');
+  219  commit;  
+  220  /Users/cappie/Downloads/mysql-5.6.27-osx10.9-x86_64/bin/mysql_tzinfo_to_sql ; exit;
+  221  /Users/cappie/Downloads/mysql-5.6.27-osx10.9-x86_64/bin/mysql_tzinfo_to_sql ; exit;
+  222  $ /usr/local/mysql/bin/mysql -u root -h localhost -p
+  223  $ /usr/local/mysql/bin/mysql -u root -h localhost -p
+  224  create database hrl
+  225  create database hr;
+  226  [root@host]# mysql
+  227  cd mysql
+  228  ssh netid@server.u.washington.edu
+  229  cdaftp.concordia.ca
+  230  /Applications/XAMPP/xamppfiles/share/addons/test ; exit;
+  231  sudo tasksel install lamp-server
+  232  /Applications/XAMPP/xamppfiles/xampp ; exit;
+  233  /Applications/XAMPP/xamppfiles/share/xampp-control-panel/xampp-control-panel ; exit;
+  234  /Applications/XAMPP/xamppfiles/share/xampp-control-panel/xampp-control-panel ; exit;
+  235  sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
+  236  sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
+  237  git
+  238  git
+  239  git
+  240  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  241   brew install git
+  242  git
+  243  pwd
+  244  cd ~/Desktop/
+  245  ssh-keygen -t rsa -b 4096 -C "linhlekim@gmail.com"
+  246  ls -al ~/.ssh
+  247  cat ~/.ssh/id_rsa.pub
+  248  cd Desktop
+  249  mkdir CEWP
+  250  pwd
+  251  mkdir CEWP
+  252  cat ~/.ssh/id_rsa.pub | pbcopy 
+  253  pwd
+  254  git clone git@github.com:majidfn/CEWP-559-fall-2017.git
+  255  docker-compose build
+  256  ls CEWP
+  257  ls CEWP/
+  258  rm -r CEWP
+  259  cd CEWP-559-fall-2017/
+  260  docker-compose build
+  261  docker-compose build
+  262  docker-compose up
+  263  git branch -a
+  264  git checkout 20170928
+  265  git status
+  266  git diff
+  267  git add source/exercises/database/msqli_procedural.php
+  268  git status
+  269  git commit -m "Solution for first exercise - MYSQLi procedural"
+  270  git push origin
+  271  git remote
+  272  git remote show origin
+  273  git remote remove origin
+  274  git remote add origin git@github.com:lleki/CEWP329.git
+  275  git push origin
+  276  git remote remove origin
+  277  remote add origin git@github.com:lleki/samplephprepo.git
+  278  git push origin
+  279  git remote show origin
+  280  git remote add origin git@github.com:lleki/samplephprepo.git
+  281  git push origin
+  282  git add source/exercises/database/msqli_procedural.php
+  283  git status
+  284  git commit -m "Solution for second exercise - MYSQLi procedural"
+  285  git remote show origin
+  286  remote remove origin
+  287  remote add origin git@github.com:lleki/samplephprepo.git
+  288  git remote add origin git@github.com:lleki/samplephprepo.git
+  289  git remote remove origin
+  290  git remote add origin git@github.com:lleki/samplephprepo.git
+  291  push origin
+  292  git push origin
+  293  git add source/exercises/database/msqli_procedural.php
+  294  git status
+  295  history
+  296  pwd
+  297  ls -al
+  298  mkdir history
+  299  history > history/20170928.log
